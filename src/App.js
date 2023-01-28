@@ -3,7 +3,7 @@ import twitterLogo from "./assets/twitter-logo.svg";
 import "./App.css";
 
 // Constants
-const TWITTER_HANDLE = "_buildspace";
+const TWITTER_HANDLE = "sarvagnakadiya";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
@@ -43,6 +43,10 @@ const App = () => {
       console.log("Connected with Public Key:", response.publicKey.toString());
       setWalletAddress(response.publicKey.toString());
     }
+  };
+  const onInputChange = (event) => {
+    const { value } = event.target;
+    setInputValue(value);
   };
 
   const sendGif = async () => {
@@ -114,15 +118,15 @@ const App = () => {
   }, [walletAddress]);
   return (
     <div className="App">
-      {/* This was solely added for some styling fanciness */}
-      <div className={walletAddress ? "authed-container" : "container"}>
+      <div className="container">
         <div className="header-container">
           <p className="header">🖼 GIF Portal</p>
           <p className="sub-text">
             View your GIF collection in the metaverse ✨
           </p>
-          {/* Add the condition to show this only if we don't have a wallet address */}
           {!walletAddress && renderNotConnectedContainer()}
+          {/* We just need to add the inverse here! */}
+          {walletAddress && renderConnectedContainer()}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
@@ -131,7 +135,7 @@ const App = () => {
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built on @${TWITTER_HANDLE}`}</a>
+          >{`built by @${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>
